@@ -4,7 +4,6 @@ from ..value_objects.macro_distribution import MacroDistribution
 
 
 class UserInfo(BaseModel):
-    #user_id: int
     gender: Gender
     age: int = Field(..., ge=1, le=120)
     height_cm: float = Field(..., gt=0, le=300)

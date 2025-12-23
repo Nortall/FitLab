@@ -5,8 +5,8 @@ from backend.app.database import Base
 class NutritionResultORM(Base):
     __tablename__ = "nutrition_results"
 
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, nullable=False, index=True)
 
     bmr = Column(Float, nullable=False)
     tdee = Column(Float, nullable=False)
@@ -15,7 +15,7 @@ class NutritionResultORM(Base):
     carbs_g = Column(Float, nullable=False)
     fat_g = Column(Float, nullable=False)
 
-    #created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     def __repr__(self):
         return f"NutritionResultORM(id={self.id}, user_id={self.user_id})"

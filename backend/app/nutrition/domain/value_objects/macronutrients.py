@@ -7,4 +7,4 @@ class Macronutrients(BaseModel):
 
 
     def calories(self) -> float:
-        return self.protein_g * 4 + self.carbs_g * 4 + self.fat_g * 4
+        return self.protein_g * 4 + self.carbs_g * 4 + self.fat_g * 9

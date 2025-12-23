@@ -1,3 +1,4 @@
+from backend.app.nutrition.domain.entities.enums import Gender
 from backend.app.nutrition.domain.entities.nutrition_result import NutritionResult
 from backend.app.nutrition.domain.entities.user_info import UserInfo
 from backend.app.nutrition.domain.value_objects.macronutrients import Macronutrients
@@ -8,14 +9,14 @@ class NutritionCalculator:
     """
     def calculate(self, user: UserInfo) -> NutritionResult:
         bmr = self._calculate_bmr_Harrison_Benedict(user)
-        tdee = bmr * user.activity_factor.value
+        tdee = self._calculate_tdee(bmr, activity_factor=user.activity_factor)
 
         macronutrients = self._calculate_macronutrients(calories=tdee, distribution=user.macro_distribution)
 
         return NutritionResult(bmr=round(bmr, 2), tdee=round(tdee, 2), macronutrients=macronutrients)
 
     def _calculate_bmr_Harrison_Benedict(self, user: UserInfo) -> float:
-        if user.gender == user.gender.MALE:
+        if user.gender == Gender.MALE:
             return 88.36 + (13.4 * user.weight_kg) + (4.8 * user.height_cm) - (5.7 * user.age)
         else:
             return 447.6 + (9.2 * user.weight_kg) + (3.1 * user.height_cm) - (4.3 * user.age)

@@ -10,15 +10,13 @@ class CalculateNutritionUseCase:
 
     def __init__(self, calculator: NutritionCalculator):
         self._calculator = calculator
-        #self._repository = repository
 
     def execute(self, user_info: UserInfo) -> NutritionResult:
         # 1. Расчёт питания
         nutrition_result = self._calculator.calculate(user_info)
 
-        # 2. Сохранение результата
-        #saved_result = self._repository.save(nutrition_result)
+        result_with_user = NutritionResult(bmr=nutrition_result.bmr, tdee=nutrition_result.tdee, macronutrients=nutrition_result.macronutrients)
 
-        # 3. Возврат результата
-        return nutrition_result
+        # 2. Возврат результата
+        return result_with_user
 
